@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>대학도우미</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+    
+            table, th, td {
+                border: 1px solid black;
+            }
+    
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>대학도우미</h1>
+        <form id="gradeForm" onsubmit="return submitForm()">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>국어</th>
+                    <th>수학</th>
+                    <th>영어</th>
+                    <th>한국사</th>
+                    <th>통합사회</th>
+                    <th>통합과학</th>
+                </tr>
+                <tr>
+                    <td>석차등급</td>
+                    <td><input type="number" name="koreanGrade" step="1" placeholder="등급을 입력하세요"></td>
+                    <td><input type="number" name="mathGrade" step="1" placeholder="등급을 입력하세요"></td>
+                    <td><input type="number" name="englishGrade" step="1" placeholder="등급을 입력하세요"></td>
+                    <td><input type="number" name="historyGrade" step="1" placeholder="등급을 입력하세요"></td>
+                    <td><input type="number" name="socialStudyGrade" step="1" placeholder="등급을 입력하세요"></td>
+                    <td><input type="number" name="scienceGrade" step="1" placeholder="등급을 입력하세요"></td>
+                </tr>
+                <tr>
+                    <td>반영비율</td>
+                    <td><input type="number" name="koreanRRate" step="1" value="4" placeholder="반영비율을 입력하세요"></td>
+                    <td><input type="number" name="mathRRate" step="1" value="4" placeholder="반영비율을 입력하세요"></td>
+                    <td><input type="number" name="englishRRate" step="1" value="4" placeholder="반영비율을 입력하세요"></td>
+                    <td><input type="number" name="historyRRate" step="1" value="3" placeholder="반영비율을 입력하세요"></td>
+                    <td><input type="number" name="socialStudyRRate" step="1" value="4" placeholder="반영비율을 입력하세요"></td>
+                    <td><input type="number" name="scienceRRate" step="1" value="4" placeholder="반영비율을 입력하세요"></td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="평균등급 계산">
+        </form>
+
+        <p id="resultParagraph">등급과 반영비율을 입력해 평균등급을 계산해 보세요</p>
+        <br>
+
+        <iframe width="450" height="600" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/35a81d2b-3f0f-4e41-b9c6-49c30242c602"></iframe>
+
+        <script>
+            function submitForm() {
+                var koreanGrade = document.getElementsByName("koreanGrade")[0].value;
+                var mathGrade = document.getElementsByName("mathGrade")[0].value;
+                var englishGrade = document.getElementsByName("englishGrade")[0].value;
+                var historyGrade = document.getElementsByName("historyGrade")[0].value;
+                var socialStudyGrade = document.getElementsByName("socialStudyGrade")[0].value;
+                var scienceGrade = document.getElementsByName("scienceGrade")[0].value;
+            
+                var koreanRRate = document.getElementsByName("koreanRRate")[0].value;
+                var mathRRate = document.getElementsByName("mathRRate")[0].value;
+                var englishRRate = document.getElementsByName("englishRRate")[0].value;
+                var historyRRate = document.getElementsByName("historyRRate")[0].value;
+                var socialStudyRRate = document.getElementsByName("socialStudyRRate")[0].value;
+                var scienceRRate = document.getElementsByName("scienceRRate")[0].value;
+
+                var totalGrade = koreanGrade * koreanRRate + mathGrade * mathRRate + englishGrade * englishRRate + historyGrade * historyRRate + socialStudyGrade * socialStudyRRate + scienceGrade * scienceRRate;
+                var totalRRate = parseInt(koreanRRate) + parseInt(mathRRate) + parseInt(englishRRate) + parseInt(historyRRate) + parseInt(socialStudyRRate) + parseInt(scienceRRate);
+                var result = totalGrade / totalRRate;
+
+                var resultParagraph = document.getElementById("resultParagraph");
+                resultParagraph.style.display = "block";
+                resultParagraph.textContent = "평균등급은 " + result.toFixed(2) + "입니다";
+
+                return false;
+            }
+        </script>
+    </body>
+</html>
